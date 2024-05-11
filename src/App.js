@@ -4,6 +4,9 @@ import axios from 'axios';
 import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import SignupLogin from './pages/Account/SignupLogin';
+import ProtectedPage from './pages/ProtectedPage.js/ProtectedPage';
+import LogoutPage from './pages/LogoutPage/LogoutPage';
+import PrivateRoute from './components/PrivateRoute';
 
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(
@@ -31,6 +34,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/conta" element={<SignupLogin />} />
+        <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} />
+        <Route path="/protected" element={<PrivateRoute><ProtectedPage /></PrivateRoute>} />
       </Routes>
     </Router>
   );
