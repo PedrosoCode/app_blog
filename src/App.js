@@ -8,6 +8,9 @@ import ProtectedPage from './pages/ProtectedPage.js/ProtectedPage';
 import LogoutPage from './pages/LogoutPage/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
 
+import MainNavbar from './components/MainNavbar/MainNavbar';
+import MainFooter from './components/MainFooter/MainFooter';
+
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(
   config => {

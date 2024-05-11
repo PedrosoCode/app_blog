@@ -1,4 +1,6 @@
 import React from 'react';
+import MainNavbar from '../../components/MainNavbar/MainNavbar';
+import MainFooter from '../../components/MainFooter/MainFooter';
 
 
 
@@ -6,7 +8,9 @@ import React from 'react';
 function HomePage() {
   return (
     <>
-Teste Home!
+      <MainNavbar />
+      Teste Home!
+      <MainFooter />
     </>
   );
 }

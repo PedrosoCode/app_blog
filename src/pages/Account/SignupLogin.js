@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Tab, Nav, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Tab, Nav, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 
 function SignupLogin() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [showModal, setShowModal] = useState(false); // Estado para controlar a visibilidade do modal
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -28,16 +30,33 @@ function SignupLogin() {
         username, password
       });
       console.log('Resposta do login:', response.data);
-      // Salvar o token no localStorage
       localStorage.setItem('token', response.data.token);
-      // Redirecionar o usuário ou fazer outra ação pós-login
+      setShowModal(true); // Abrir o modal após o login bem-sucedido
     } catch (error) {
       console.error('Erro ao logar:', error.response.data);
     }
   };
 
+  const handleClose = () => {
+    setShowModal(false);
+    navigate('/'); // Redirecionar para a home após fechar o modal
+  };
+
   return (
     <Container className="mt-5">
+      {/* Modal de Feedback */}
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Login bem-sucedido</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Você foi logado com sucesso! Bem-vindo ao sistema.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Tab.Container defaultActiveKey="signup">
         <Nav variant="pills" className="justify-content-center">
           <Nav.Item>
@@ -68,7 +87,7 @@ function SignupLogin() {
           <Tab.Pane eventKey="login">
             <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3">
-                <Form.Label>Nome de usuário ou Email</Form.Label>
+                <Form.Label>Nome de usuário</Form.Label>
                 <Form.Control type="text" placeholder="Digite seu nome de usuário ou email" value={username} onChange={(e) => setUsername(e.target.value)} />
               </Form.Group>
               <Form.Group className="mb-3">
