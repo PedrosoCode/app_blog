@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Tab, Nav, Row, Col, Form, Button } from 'react-bootstrap';
 
@@ -7,16 +8,32 @@ function SignupLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    console.log("Cadastrado com:", username, email, password);
-    // Aqui você pode adicionar a lógica para enviar os dados para o servidor
-  };
 
-  const handleLogin = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("Login com:", username, password);
-    // Aqui você pode adicionar a lógica para enviar os dados para o servidor
+    try {
+      const response = await axios.post('http://localhost:3042/auth/signup', {
+        username, email, password
+      });
+      console.log('Resposta do cadastro:', response.data);
+    } catch (error) {
+      console.error('Erro ao cadastrar:', error.response ? error.response.data : 'Erro desconhecido');
+    }
+  };
+  
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3042/auth/login', {
+        username, password
+      });
+      console.log('Resposta do login:', response.data);
+      // Salvar o token no localStorage
+      localStorage.setItem('token', response.data.token);
+      // Redirecionar o usuário ou fazer outra ação pós-login
+    } catch (error) {
+      console.error('Erro ao logar:', error.response.data);
+    }
   };
 
   return (
