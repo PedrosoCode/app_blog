@@ -10,6 +10,9 @@ import PrivateRoute from './components/PrivateRoute';
 
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
+import CreatePost from './pages/CreatePost/CreatePost';
+import EditPost from './pages/EditPost/EditPost';
+import PostList from './pages/PostList/PostList';
 
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(
@@ -25,7 +28,6 @@ axios.interceptors.request.use(
   }
 );
 
-
 function App() {
   return (
     <Router>
@@ -39,6 +41,9 @@ function App() {
         <Route path="/conta" element={<SignupLogin />} />
         <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} />
         <Route path="/protected" element={<PrivateRoute><ProtectedPage /></PrivateRoute>} />
+        <Route path="/criar" element={<CreatePost />} />
+        <Route path="/editar/:postId" element={<EditPost />} />
+        <Route path="/lista" element={<PostList />} />
       </Routes>
     </Router>
   );
