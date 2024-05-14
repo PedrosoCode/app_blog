@@ -1,4 +1,5 @@
 import React from 'react';
+import UserInfo from '../../components/Testes/UserInfo';
 
 function ProtectedPage() {
   return (
@@ -9,6 +10,7 @@ function ProtectedPage() {
         <button onClick={() => alert("Você está utilizando um recurso protegido!")}>
           Clique aqui para uma ação protegida
         </button>
+        <UserInfo />
       </div>
     </div>
   );
