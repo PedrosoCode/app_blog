@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 
 function PostList() {
     const [posts, setPosts] = useState([]);
@@ -36,18 +37,32 @@ function PostList() {
     };
 
     return (
-        <div>
-            <h1>Posts</h1>
-            {posts.map(post => (
-                <div key={post.id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.content}</p>
-                    <small>Por {post.user_id} em {new Date(post.created_at).toLocaleDateString()}</small>
-                    <button onClick={() => editPost(post.id)}>Editar</button>
-                    <button onClick={() => deletePost(post.id)}>Deletar</button>
-                </div>
-            ))}
-        </div>
+        <Container>
+            <h1 className="my-4">Posts</h1>
+            <Row>
+                {posts.map(post => (
+                    <Col key={post.id} md={4} className="mb-4">
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>{post.title}</Card.Title>
+                                <Card.Text>{post.content}</Card.Text>
+                                <Card.Text>
+                                    <small className="text-muted">
+                                        Por {post.user_id} em {new Date(post.created_at).toLocaleDateString()}
+                                    </small>
+                                </Card.Text>
+                                <Button variant="primary" onClick={() => editPost(post.id)} className="me-2">
+                                    Editar
+                                </Button>
+                                <Button variant="danger" onClick={() => deletePost(post.id)}>
+                                    Deletar
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     );
 }
 

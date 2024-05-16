@@ -14,7 +14,7 @@ function SignupLogin() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3042/auth/signup', {
+      const response = await axios.post('http://localhost:3042/signup', {
         username, email, password
       });
       console.log('Resposta do cadastro:', response.data);
@@ -26,7 +26,7 @@ function SignupLogin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3042/auth/login', {
+      const response = await axios.post('http://localhost:3042/login', {
         username, password
       });
       console.log('Resposta do login:', response.data);
