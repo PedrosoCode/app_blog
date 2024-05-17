@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button, Container, Alert } from 'react-bootstrap';
+import { Form, Button, Container, Alert, Modal } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 function EditPost() {
@@ -8,6 +8,7 @@ function EditPost() {
     const [post, setPost] = useState({ title: '', content: '' });
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -21,8 +22,12 @@ function EditPost() {
             setPost(response.data);
         })
         .catch(error => {
-            console.error('Erro ao buscar post:', error);
-            setError('Erro ao buscar post');
+            if (error.response && error.response.status === 403) {
+                setShowModal(true);
+            } else {
+                console.error('Erro ao buscar post:', error);
+                setError('Erro ao buscar post');
+            }
         });
     }, [postId]);
 
@@ -41,13 +46,21 @@ function EditPost() {
             setSuccess('Post atualizado com sucesso');
         })
         .catch(error => {
-            console.error('Erro ao atualizar post:', error);
-            setError('Erro ao atualizar post');
+            if (error.response && error.response.status === 403) {
+                setShowModal(true);
+            } else {
+                console.error('Erro ao atualizar post:', error);
+                setError('Erro ao atualizar post');
+            }
         });
     };
 
     const handleChange = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value });
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -81,6 +94,20 @@ function EditPost() {
                     Atualizar
                 </Button>
             </Form>
+
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Acesso Negado</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Você não tem permissão para editar este post.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }
