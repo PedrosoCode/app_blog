@@ -13,6 +13,7 @@ import MainFooter from './components/MainFooter/MainFooter';
 import CreatePost from './pages/CreatePost/CreatePost';
 import EditPost from './pages/EditPost/EditPost';
 import PostList from './pages/PostList/PostList';
+import AllPostsList from './pages/AllPostsList/AllPostsList';
 
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(
@@ -44,6 +45,7 @@ function App() {
         <Route path="/criar" element={<CreatePost />} />
         <Route path="/editar/:postId" element={<EditPost />} />
         <Route path="/lista" element={<PostList />} />
+        <Route path="/listaTudo" element={<AllPostsList />} />
       </Routes>
     </Router>
   );

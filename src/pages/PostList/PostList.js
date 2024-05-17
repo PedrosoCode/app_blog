@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 
 function PostList() {
     const [posts, setPosts] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:3042/api/posts')
-            .then(response => {
-                setPosts(response.data);
-            })
-            .catch(error => {
+        const token = localStorage.getItem('token');
+
+        axios.get('http://localhost:3042/api/user/posts', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            setPosts(response.data);
+        })
+        .catch(error => {
+            if (error.response && error.response.status === 403) {
+                setShowModal(true);
+            } else {
                 console.error('Erro ao buscar posts:', error);
-            });
+            }
+        });
     }, []);
 
     const editPost = (postId) => {
@@ -32,8 +43,16 @@ function PostList() {
             setPosts(posts.filter(post => post.id !== postId));
         })
         .catch(error => {
-            console.error('Erro ao deletar post:', error);
+            if (error.response && error.response.status === 403) {
+                setShowModal(true);
+            } else {
+                console.error('Erro ao deletar post:', error);
+            }
         });
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -62,6 +81,20 @@ function PostList() {
                     </Col>
                 ))}
             </Row>
+
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Acesso Negado</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Você não tem permissão para acessar esta página.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }
