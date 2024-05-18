@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Container, Form, Button } from 'react-bootstrap';
 
 function CreatePost() {
     const [title, setTitle] = useState('');
@@ -26,20 +27,33 @@ function CreatePost() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Criar Post</h1>
-            <label>
-                Título:
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-            </label>
-            <br />
-            <label>
-                Conteúdo:
-                <textarea value={content} onChange={(e) => setContent(e.target.value)} required></textarea>
-            </label>
-            <br />
-            <button type="submit">Criar</button>
-        </form>
+        <Container className="mt-5">
+            <h1 className="mb-4">Criar Post</h1>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formTitle" className="mb-3">
+                    <Form.Label>Título</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        value={title} 
+                        onChange={(e) => setTitle(e.target.value)} 
+                        required 
+                        placeholder="Digite o título do post"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formContent" className="mb-3">
+                    <Form.Label>Conteúdo</Form.Label>
+                    <Form.Control 
+                        as="textarea" 
+                        rows={5} 
+                        value={content} 
+                        onChange={(e) => setContent(e.target.value)} 
+                        required 
+                        placeholder="Digite o conteúdo do post"
+                    />
+                </Form.Group>
+                <Button variant="primary" type="submit">Criar</Button>
+            </Form>
+        </Container>
     );
 }
 
