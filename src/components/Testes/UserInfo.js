@@ -12,7 +12,7 @@ function UserInfo() {
             return; // Encerra o useEffect se não houver token
         }
 
-        axios.get('http://localhost:3042/usuario', {
+        axios.get('http://localhost:3042/api/usuario', {
             headers: {
                 'Authorization': `Bearer ${token}`  // Inclui o token no cabeçalho da requisição
             }
