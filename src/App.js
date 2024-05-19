@@ -15,6 +15,7 @@ import EditPost from './pages/EditPost/EditPost';
 import PostList from './pages/PostList/PostList';
 import AllPostsList from './pages/AllPostsList/AllPostsList';
 import ManageImages from './pages/ManageImages/ManageImages';
+import AdminFooterPage from './pages/AdminFooterPage/AdminFooterPage';
 
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(
@@ -41,13 +42,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/conta" element={<SignupLogin />} />
-        <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} />
+        <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} /> 
         <Route path="/protected" element={<PrivateRoute><ProtectedPage /></PrivateRoute>} />
         <Route path="/criar" element={<CreatePost />} />
         <Route path="/editar/:postId" element={<EditPost />} />
         <Route path="/lista" element={<PostList />} />
         <Route path="/listaTudo" element={<AllPostsList />} />
         <Route path="/img" element={<ManageImages />} />
+        <Route path="/footer" element={<PrivateRoute adminOnly={true}><AdminFooterPage /></PrivateRoute>} /> 
       </Routes>
     </Router>
   );

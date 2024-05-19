@@ -42,6 +42,9 @@ function SignupLogin() {
     navigate('/'); // Redirecionar para a home após fechar o modal
   };
 
+  //TODO - adicionar feedback ao criar uma conta bem sucedida
+  //TODO - fazer com que ao criar uma conta, o role seja enviado ao banco como user, ao invés de entrar como null por não receber dados
+
   return (
     <Container className="mt-5">
       {/* Modal de Feedback */}
