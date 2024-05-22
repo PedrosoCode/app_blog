@@ -15,6 +15,8 @@ const MainFooter = () => {
             });
     }, []);
 
+    //TODO - Condicionar a tabela e o front para permitir que o usuário defina links dinâmicos e não apenas texto simples
+
     return (
         <footer className="bg-dark text-white mt-4">
             <Container fluid className="py-3">

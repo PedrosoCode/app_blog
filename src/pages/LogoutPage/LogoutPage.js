@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 function LogoutPage() {
     const navigate = useNavigate();
@@ -13,13 +14,17 @@ function LogoutPage() {
     };
 
     return (
-        <div>
-            <h1>Pronto para Deslogar?</h1>
-            <p>Clique no botão abaixo para encerrar sua sessão.</p>
-            <button onClick={handleLogout} style={{ padding: "10px 20px", fontSize: "16px", cursor: "pointer" }}>
-                Deslogar
-            </button>
-        </div>
+        <Container className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+            <Row className="text-center">
+                <Col>
+                    <h1 className="mb-4">Pronto para Deslogar?</h1>
+                    <p>Clique no botão abaixo para encerrar sua sessão.</p>
+                    <Button variant="danger" size="lg" onClick={handleLogout}>
+                        Deslogar
+                    </Button>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
