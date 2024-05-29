@@ -6,6 +6,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
+//REVIEW - verificar de deixar menus dinâmicos
+
 function MainNavbar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">

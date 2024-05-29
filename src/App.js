@@ -14,6 +14,10 @@ import CreatePost from './pages/CreatePost/CreatePost';
 import EditPost from './pages/EditPost/EditPost';
 import PostList from './pages/PostList/PostList';
 import AllPostsList from './pages/AllPostsList/AllPostsList';
+
+import ProductList from './pages/ProductList/ProductList';
+import CreateProduct from './pages/CreateProduct/CreateProduct';
+
 import ManageImages from './pages/ManageImages/ManageImages';
 import AdminFooterPage from './pages/AdminFooterPage/AdminFooterPage';
 
@@ -30,6 +34,10 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+//REVIEW - URL do roteamento para acessar páginas de forma mais intuitiva
+//TODO - Criar uma página para update de posts, ou deleção
+//TODO - Criar uma imagem de placeholder para ser usada, em situações onde uma imagem não está definida
 
 function App() {
   return (
@@ -50,6 +58,8 @@ function App() {
         <Route path="/listaTudo" element={<AllPostsList />} />
         <Route path="/img" element={<ManageImages />} />
         <Route path="/footer" element={<PrivateRoute adminOnly={true}><AdminFooterPage /></PrivateRoute>} /> 
+        <Route path="/produtos" element={<ProductList />} />
+        <Route path="/criarproduto" element={<PrivateRoute><CreateProduct /></PrivateRoute>} /> 
       </Routes>
     </Router>
   );
