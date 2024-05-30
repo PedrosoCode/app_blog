@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 
-//TODO - Permitir que o usuário crie um produto sem ter uma imagem
-
 const CreateProduct = () => {
     const [product, setProduct] = useState({ titulo: '', descricao: '', especificacoes_tecnicas: '', preco: '' });
     const [image, setImage] = useState(null);
@@ -27,7 +25,10 @@ const CreateProduct = () => {
         formData.append('descricao', product.descricao);
         formData.append('especificacoes_tecnicas', product.especificacoes_tecnicas);
         formData.append('preco', product.preco);
-        formData.append('image', image);
+
+        if (image) {
+            formData.append('image', image);
+        }
 
         try {
             const response = await axios.post('http://localhost:3042/api/products', formData, {
@@ -94,12 +95,11 @@ const CreateProduct = () => {
                     />
                 </Form.Group>
                 <Form.Group controlId="formImage">
-                    <Form.Label>Imagem</Form.Label>
+                    <Form.Label>Imagem (opcional)</Form.Label>
                     <Form.Control
                         type="file"
                         name="image"
                         onChange={handleImageChange}
-                        required
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit">
