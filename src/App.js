@@ -7,6 +7,7 @@ import SignupLogin from './pages/Account/SignupLogin';
 import ProtectedPage from './pages/ProtectedPage.js/ProtectedPage';
 import LogoutPage from './pages/LogoutPage/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
+import CartList from './pages/CartList/CartList,';
 
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
@@ -62,6 +63,7 @@ function App() {
         <Route path="/img" element={<ManageImages />} />
         <Route path="/footer" element={<PrivateRoute adminOnly={true}><AdminFooterPage /></PrivateRoute>} /> 
         <Route path="/produtos" element={<ProductList />} />
+        <Route path="/carrinho" element={<CartList />} />
         <Route path="/criarproduto" element={<PrivateRoute><CreateProduct /></PrivateRoute>} /> 
         <Route path="/modpd/:id" element={<UpdateDeleteProduct />} />
       </Routes>

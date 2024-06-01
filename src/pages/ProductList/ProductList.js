@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Card, Container, Row, Col, Button } from 'react-bootstrap';
+import { FaCartPlus } from 'react-icons/fa'; // Importando o ícone de "Adicionar ao Carrinho"
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -16,6 +17,17 @@ const ProductList = () => {
                 setError('Erro ao buscar produtos.');
             });
     }, []);
+
+    const handleAddToCart = (productId) => {
+        axios.post('http://localhost:3042/api/carrinho', { produto_id: productId, quantidade: 1 })
+            .then(response => {
+                alert('Produto adicionado ao carrinho!');
+            })
+            .catch(error => {
+                console.error('Erro ao adicionar produto ao carrinho:', error);
+                alert('Erro ao adicionar produto ao carrinho.');
+            });
+    };
 
     return (
         <Container>
@@ -41,6 +53,9 @@ const ProductList = () => {
                                         id {product.id}
                                     </small>
                                 </Card.Text>
+                                <Button variant="primary" onClick={() => handleAddToCart(product.id)}>
+                                    <FaCartPlus /> Adicionar ao Carrinho
+                                </Button>
                             </Card.Body>
                         </Card>
                     </Col>
