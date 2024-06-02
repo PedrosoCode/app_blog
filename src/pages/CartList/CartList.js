@@ -60,6 +60,19 @@ const CartList = () => {
             });
     };
 
+    const handleCheckout = () => {
+        axios.post('http://localhost:3042/api/pedido')
+            .then(response => {
+                alert('Pedido fechado com sucesso!');
+                setCartItems([]);
+                setTotal(0);
+            })
+            .catch(error => {
+                console.error('Erro ao fechar o pedido:', error);
+                alert('Erro ao fechar o pedido.');
+            });
+    };
+
     return (
         <Container>
             <h1 className="my-4">Meu Carrinho</h1>
@@ -113,6 +126,7 @@ const CartList = () => {
                         </tr>
                     </tbody>
                 </Table>
+                <Button variant="success" onClick={handleCheckout}>Fechar Pedido</Button>
             </div>
             <div className="d-block d-md-none">
                 {cartItems.map(item => (
@@ -156,6 +170,7 @@ const CartList = () => {
                         </Row>
                     </Card.Body>
                 </Card>
+                <Button variant="success" block onClick={handleCheckout}>Fechar Pedido</Button>
             </div>
         </Container>
     );

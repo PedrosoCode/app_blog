@@ -7,7 +7,7 @@ import SignupLogin from './pages/Account/SignupLogin';
 import ProtectedPage from './pages/ProtectedPage.js/ProtectedPage';
 import LogoutPage from './pages/LogoutPage/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
-import CartList from './pages/CartList/CartList,';
+import CartList from './pages/CartList/CartList';
 
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
