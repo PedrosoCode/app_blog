@@ -17,6 +17,7 @@ import EditPost from './pages/EditPost/EditPost';
 import PostList from './pages/PostList/PostList';
 import AllPostsList from './pages/AllPostsList/AllPostsList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import OrderDetail from './pages/OrderDetail/OrderDetail';
 
 import UpdateDeleteProduct from './pages/UpdateDeleteProduct/UpdateDeleteProduct';
 
@@ -42,8 +43,8 @@ axios.interceptors.request.use(
 
 //REVIEW - URL do roteamento para acessar páginas de forma mais intuitiva
 //TODO - Adicionar suporte a Markdown nos posts 
-//TODO - Criar uma página para update de posts, ou deleção
 //TODO - Criar uma imagem de placeholder para ser usada, em situações onde uma imagem não está definida
+//FIXME - rever a hierarquia de pastas para ter um front mais organizado
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
         <Route path="/modpd/:id" element={<UpdateDeleteProduct />} />
         <Route path="/pedidos" element={<PrivateRoute><OrderList /></PrivateRoute>} /> 
         <Route path="/produtos/:productId" element={<ProductDetail />} />
+        <Route path="/pedidos/:orderId" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
       </Routes>
     </Router>
   );
