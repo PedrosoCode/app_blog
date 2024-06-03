@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Container, Table, Button, Row, Col, Card } from 'react-bootstrap';
 import { FaTrash, FaPlus, FaMinus } from 'react-icons/fa';
 
+//REVIEW - colocar algo como "seu carrinho está vazio. coloque alguns ítens antes de fazer uma compra" ou parecido quando estiver sem ítens
+
+
 const CartList = () => {
     const [cartItems, setCartItems] = useState([]);
     const [error, setError] = useState('');

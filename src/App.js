@@ -8,6 +8,7 @@ import ProtectedPage from './pages/ProtectedPage.js/ProtectedPage';
 import LogoutPage from './pages/LogoutPage/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
 import CartList from './pages/CartList/CartList';
+import OrderList from './pages/OrderList/OrderList';
 
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
@@ -66,6 +67,7 @@ function App() {
         <Route path="/carrinho" element={<CartList />} />
         <Route path="/criarproduto" element={<PrivateRoute><CreateProduct /></PrivateRoute>} /> 
         <Route path="/modpd/:id" element={<UpdateDeleteProduct />} />
+        <Route path="/pedidos" element={<PrivateRoute><OrderList /></PrivateRoute>} /> 
       </Routes>
     </Router>
   );
