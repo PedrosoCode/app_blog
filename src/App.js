@@ -16,6 +16,7 @@ import CreatePost from './pages/CreatePost/CreatePost';
 import EditPost from './pages/EditPost/EditPost';
 import PostList from './pages/PostList/PostList';
 import AllPostsList from './pages/AllPostsList/AllPostsList';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 
 import UpdateDeleteProduct from './pages/UpdateDeleteProduct/UpdateDeleteProduct';
 
@@ -68,6 +69,7 @@ function App() {
         <Route path="/criarproduto" element={<PrivateRoute><CreateProduct /></PrivateRoute>} /> 
         <Route path="/modpd/:id" element={<UpdateDeleteProduct />} />
         <Route path="/pedidos" element={<PrivateRoute><OrderList /></PrivateRoute>} /> 
+        <Route path="/produtos/:productId" element={<ProductDetail />} />
       </Routes>
     </Router>
   );

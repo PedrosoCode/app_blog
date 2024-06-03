@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
-import { FaCartPlus } from 'react-icons/fa'; // Importando o ícone de "Adicionar ao Carrinho"
+import { FaCartPlus } from 'react-icons/fa';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:3042/api/products')
@@ -41,7 +43,9 @@ const ProductList = () => {
                                 <Card.Img variant="top" src={`http://localhost:3042${product.image_path}`} />
                             )}
                             <Card.Body>
-                                <Card.Title>{product.titulo}</Card.Title>
+                                <Card.Title style={{ cursor: 'pointer' }} onClick={() => navigate(`/produtos/${product.id}`)}>
+                                    {product.titulo}
+                                </Card.Title>
                                 <Card.Text>{product.descricao}</Card.Text>
                                 <Card.Text>
                                     <strong>Preço: </strong>{product.preco}
