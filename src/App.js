@@ -15,6 +15,7 @@ import MainFooter from './components/MainFooter/MainFooter';
 import CreatePost from './pages/CreatePost/CreatePost';
 import EditPost from './pages/EditPost/EditPost';
 import PostList from './pages/PostList/PostList';
+import PostDetail from './pages/PostDetail/PostDetail';
 import AllPostsList from './pages/AllPostsList/AllPostsList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import OrderDetail from './pages/OrderDetail/OrderDetail';
@@ -61,6 +62,7 @@ function App() {
         <Route path="/protected" element={<PrivateRoute><ProtectedPage /></PrivateRoute>} />
         <Route path="/criar" element={<CreatePost />} />
         <Route path="/editar/:postId" element={<EditPost />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/lista" element={<PostList />} />
         <Route path="/listaTudo" element={<AllPostsList />} />
         <Route path="/img" element={<ManageImages />} />
