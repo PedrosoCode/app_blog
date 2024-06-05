@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Card, Container, Row, Col, Modal, Button } from 'react-bootstrap'; // Adicione Button aqui
 import { Link } from 'react-router-dom';
 
+//TODO - adicionar filtro por título, e autor
+
 function AllPostsList() {
   const [posts, setPosts] = useState([]);
   const [showModal, setShowModal] = useState(false);
