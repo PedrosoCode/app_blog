@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Container, Row, Col, Modal, Button } from 'react-bootstrap'; // Adicione Button aqui
+import { Card, Container, Row, Col, Modal, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
-//TODO - adicionar filtro por título, e autor
 
 function AllPostsList() {
   const [posts, setPosts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [searchTitle, setSearchTitle] = useState('');
+  const [searchAuthor, setSearchAuthor] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:3042/api/posts')
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = () => {
+    let query = `http://localhost:3042/api/posts?title=${searchTitle}&author=${searchAuthor}`;
+    axios.get(query)
       .then(response => {
         setPosts(response.data);
       })
@@ -24,7 +29,11 @@ function AllPostsList() {
           setErrorMessage('Erro ao buscar posts.');
         }
       });
-  }, []);
+  };
+
+  const handleSearch = () => {
+    fetchPosts();
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -33,6 +42,29 @@ function AllPostsList() {
   return (
     <Container>
       <h1 className="my-4">Todos os Posts</h1>
+      <Form className="mb-4">
+        <Form.Group controlId="searchTitle">
+          <Form.Label>Buscar por título</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Digite o título"
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="searchAuthor">
+          <Form.Label>Buscar por autor</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Digite o ID do autor"
+            value={searchAuthor}
+            onChange={(e) => setSearchAuthor(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="primary" onClick={handleSearch}>
+          Filtrar
+        </Button>
+      </Form>
       <Row>
         {posts.map(post => (
           <Col key={post.id} md={4} className="mb-4">
