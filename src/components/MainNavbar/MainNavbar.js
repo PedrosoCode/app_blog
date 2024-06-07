@@ -25,21 +25,46 @@ function MainNavbar() {
             <LinkContainer to="/protected">
               <Nav.Link>Protected</Nav.Link>
             </LinkContainer>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <LinkContainer to="/logout">
+              <Nav.Link>Logout</Nav.Link>
+            </LinkContainer>
+            <NavDropdown title="Posts" id="posts-nav-dropdown">
               <LinkContainer to="/criar">
                 <NavDropdown.Item>Criar Post</NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="/editar/:postId">
+              <LinkContainer to="/editar">
                 <NavDropdown.Item>Editar Post</NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/lista">
                 <NavDropdown.Item>Lista de Posts</NavDropdown.Item>
               </LinkContainer>
-              <NavDropdown.Divider />
               <LinkContainer to="/listaTudo">
                 <NavDropdown.Item>Todos os Posts</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
+            <NavDropdown title="Produtos" id="products-nav-dropdown">
+              <LinkContainer to="/produtos">
+                <NavDropdown.Item>Lista de Produtos</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/criarproduto">
+                <NavDropdown.Item>Criar Produto</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/modpd">
+                <NavDropdown.Item>Modificar Produto</NavDropdown.Item>
+              </LinkContainer>
+            </NavDropdown>
+            <LinkContainer to="/carrinho">
+              <Nav.Link>Carrinho</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/pedidos">
+              <Nav.Link>Pedidos</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/img">
+              <Nav.Link>Gerenciar Imagens</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/footer">
+              <Nav.Link>Footer Admin</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
