@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Tab, Nav, Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import { Container, Tab, Nav, Form, Button, Modal } from 'react-bootstrap';
 
 function SignupLogin() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false); // Estado para controlar a visibilidade do modal
+  const [showSignupModal, setShowSignupModal] = useState(false); // Estado para controlar a visibilidade do modal de signup
+  const [showLoginModal, setShowLoginModal] = useState(false); // Estado para controlar a visibilidade do modal de login
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -18,6 +19,7 @@ function SignupLogin() {
         username, email, password
       });
       console.log('Resposta do cadastro:', response.data);
+      setShowSignupModal(true); // Abrir o modal após o cadastro bem-sucedido
     } catch (error) {
       console.error('Erro ao cadastrar:', error.response ? error.response.data : 'Erro desconhecido');
     }
@@ -31,30 +33,45 @@ function SignupLogin() {
       });
       console.log('Resposta do login:', response.data);
       localStorage.setItem('token', response.data.token);
-      setShowModal(true); // Abrir o modal após o login bem-sucedido
+      setShowLoginModal(true); // Abrir o modal após o login bem-sucedido
     } catch (error) {
       console.error('Erro ao logar:', error.response.data);
     }
   };
 
-  const handleClose = () => {
-    setShowModal(false);
-    navigate('/'); // Redirecionar para a home após fechar o modal
+  const handleCloseSignupModal = () => {
+    setShowSignupModal(false);
+    navigate('/'); // Redirecionar para a home após fechar o modal de signup
   };
 
-  //TODO - adicionar feedback ao criar uma conta bem sucedida
-  //TODO - fazer com que ao criar uma conta, o role seja enviado ao banco como user, ao invés de entrar como null por não receber dados
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false);
+    navigate('/'); // Redirecionar para a home após fechar o modal de login
+  };
 
   return (
     <Container className="mt-5">
-      {/* Modal de Feedback */}
-      <Modal show={showModal} onHide={handleClose}>
+      {/* Modal de Feedback de Cadastro */}
+      <Modal show={showSignupModal} onHide={handleCloseSignupModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cadastro bem-sucedido</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Conta criada com sucesso! Bem-vindo ao sistema.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseSignupModal}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal de Feedback de Login */}
+      <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
         <Modal.Header closeButton>
           <Modal.Title>Login bem-sucedido</Modal.Title>
         </Modal.Header>
         <Modal.Body>Você foi logado com sucesso! Bem-vindo ao sistema.</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCloseLoginModal}>
             Fechar
           </Button>
         </Modal.Footer>
