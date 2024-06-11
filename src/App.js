@@ -1,32 +1,33 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
-import HomePage from './pages/HomePage/HomePage';
-import AboutPage from './pages/AboutPage/AboutPage';
-import SignupLogin from './pages/Account/SignupLogin';
-import ProtectedPage from './pages/ProtectedPage.js/ProtectedPage';
-import LogoutPage from './pages/LogoutPage/LogoutPage';
+import HomePage from './pages/modules/pages/HomePage/HomePage';
+import AboutPage from './pages/modules/pages/AboutPage/AboutPage';
+import SignupLogin from './pages/modules/auth/Account/SignupLogin';
+import ProtectedPage from './pages/modules/pages/ProtectedPage.js/ProtectedPage';
+import LogoutPage from './pages/modules/auth/LogoutPage/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
-import CartList from './pages/CartList/CartList';
-import OrderList from './pages/OrderList/OrderList';
+import CartList from './pages/modules/cart/CartList/CartList';
+import OrderList from './pages/modules/cart/OrderList/OrderList';
+
 
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
-import CreatePost from './pages/CreatePost/CreatePost';
-import EditPost from './pages/EditPost/EditPost';
-import PostList from './pages/PostList/PostList';
-import PostDetail from './pages/PostDetail/PostDetail';
-import AllPostsList from './pages/AllPostsList/AllPostsList';
-import ProductDetail from './pages/ProductDetail/ProductDetail';
-import OrderDetail from './pages/OrderDetail/OrderDetail';
+import CreatePost from './pages/modules/posts/CreatePost/CreatePost';
+import EditPost from './pages/modules/posts/EditPost/EditPost';
+import PostList from './pages/modules/posts/PostList/PostList';
+import PostDetail from './pages/modules/posts/PostDetail/PostDetail';
+import AllPostsList from './pages/modules/posts/AllPostsList/AllPostsList';
+import ProductDetail from './pages/modules/shop/ProductDetail/ProductDetail';
+import OrderDetail from './pages/modules/cart/OrderDetail/OrderDetail';
 
-import UpdateDeleteProduct from './pages/UpdateDeleteProduct/UpdateDeleteProduct';
+import UpdateDeleteProduct from './pages/modules/shop/UpdateDeleteProduct/UpdateDeleteProduct';
 
-import ProductList from './pages/ProductList/ProductList';
-import CreateProduct from './pages/CreateProduct/CreateProduct';
+import ProductList from './pages/modules/shop/ProductList/ProductList';
+import CreateProduct from './pages/modules/shop/CreateProduct/CreateProduct';
 
-import ManageImages from './pages/ManageImages/ManageImages';
-import AdminFooterPage from './pages/AdminFooterPage/AdminFooterPage';
+import ManageImages from './pages/modules/misc/ManageImages/ManageImages';
+import AdminFooterPage from './pages/modules/admin/AdminFooterPage/AdminFooterPage';
 
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(

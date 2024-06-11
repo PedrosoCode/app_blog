@@ -1,6 +1,5 @@
 import React from 'react';
-import UserInfo from '../../components/Testes/UserInfo';
-
+import UserInfo from '../../../../components/Testes/UserInfo';
 function ProtectedPage() {
   return (
     <div style={{ padding: "20px", fontSize: "20px" }}>
