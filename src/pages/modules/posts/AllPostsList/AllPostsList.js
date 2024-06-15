@@ -10,12 +10,14 @@ function AllPostsList() {
   const [searchAuthor, setSearchAuthor] = useState('');
   const [showModal, setShowModal] = useState(false);
 
+  const apiUrl = process.env.REACT_APP_API_URL; // Obtém a URL base da API a partir das variáveis de ambiente
+
   useEffect(() => {
     fetchPosts();
   }, []);
 
   const fetchPosts = () => {
-    let query = `http://localhost:3042/api/posts?title=${searchTitle}&author=${searchAuthor}`;
+    let query = `${apiUrl}/api/posts?title=${searchTitle}&author=${searchAuthor}`;
     axios.get(query)
       .then(response => {
         setPosts(response.data);
