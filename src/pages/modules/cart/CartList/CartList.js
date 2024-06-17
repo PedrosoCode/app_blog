@@ -3,9 +3,6 @@ import axios from 'axios';
 import { Container, Table, Button, Row, Col, Card } from 'react-bootstrap';
 import { FaTrash, FaPlus, FaMinus } from 'react-icons/fa';
 
-//REVIEW - colocar algo como "seu carrinho está vazio. coloque alguns ítens antes de fazer uma compra" ou parecido quando estiver sem ítens
-
-
 const CartList = () => {
     const [cartItems, setCartItems] = useState([]);
     const [error, setError] = useState('');
@@ -18,6 +15,7 @@ const CartList = () => {
     const fetchCartItems = () => {
         axios.get('http://localhost:3042/api/carrinho')
             .then(response => {
+                console.log('Cart items fetched:', response.data); // Debugging log
                 setCartItems(response.data);
                 calculateTotal(response.data);
             })
@@ -71,15 +69,17 @@ const CartList = () => {
                 setTotal(0);
             })
             .catch(error => {
-                console.error('Erro ao fechar o pedido:', error);
-                alert('Erro ao fechar o pedido.');
+                console.error('Erro ao fechar o pedido:', error.response.data);
+                alert(`Erro ao fechar o pedido: ${error.response.data}`);
             });
     };
+    
 
     return (
         <Container>
             <h1 className="my-4">Meu Carrinho</h1>
             {error && <div className="alert alert-danger">{error}</div>}
+            {cartItems.length === 0 && <div className="alert alert-info">Seu carrinho está vazio. Coloque alguns itens antes de fazer uma compra.</div>}
             <div className="d-none d-md-block">
                 <Table striped bordered hover>
                     <thead>
@@ -129,7 +129,7 @@ const CartList = () => {
                         </tr>
                     </tbody>
                 </Table>
-                <Button variant="success" onClick={handleCheckout}>Fechar Pedido</Button>
+                <Button variant="success" onClick={handleCheckout} block="true">Fechar Pedido</Button>
             </div>
             <div className="d-block d-md-none">
                 {cartItems.map(item => (
@@ -173,7 +173,7 @@ const CartList = () => {
                         </Row>
                     </Card.Body>
                 </Card>
-                <Button variant="success" block onClick={handleCheckout}>Fechar Pedido</Button>
+                <Button variant="success" block="true" onClick={handleCheckout}>Fechar Pedido</Button>
             </div>
         </Container>
     );

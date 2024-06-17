@@ -49,7 +49,7 @@ axios.interceptors.request.use(
 // REVIEW - aprender a usar Salt para que senhas iguais não tenham a mesma hash
 // TODO - Adicionar suporte a Markdown nos posts 
 // TODO - Criar uma imagem de placeholder para ser usada, em situações onde uma imagem não está definida
-// FIXME - rever a hierarquia de pastas para ter um front mais organizado
+// TODO - módulo de financeiro - contas a pagar, a receber, lançamento e baixa 
 
 function App() {
   return (
