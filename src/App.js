@@ -26,6 +26,8 @@ import AdminFooterPage from './pages/modules/admin/AdminFooterPage/AdminFooterPa
 import CartList from './pages/modules/cart/CartList/CartList';
 import OrderList from './pages/modules/cart/OrderList/OrderList';
 
+import CreateWeaponForm from './pages/modules/rpg/CreateWeaponForm';
+
 // Components
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
@@ -50,6 +52,15 @@ axios.interceptors.request.use(
 // TODO - Adicionar suporte a Markdown nos posts 
 // TODO - Criar uma imagem de placeholder para ser usada, em situações onde uma imagem não está definida
 // TODO - módulo de financeiro - contas a pagar, a receber, lançamento e baixa 
+
+//Modulo rpg de mesa
+//TODO - DELETE de armas
+//TODO - UPDATE de armas
+//TODO - Visualizar geral, e único de armas
+
+//TODO - ferramenta de cálculo automático de rolagem de armas 
+
+//TODO - Implementar módulo de ficha de personagem
 
 function App() {
   return (
@@ -82,6 +93,8 @@ function App() {
         <Route path="/pedidos" element={<PrivateRoute><OrderList /></PrivateRoute>} />
         <Route path="/produtos/:productId" element={<ProductDetail />} />
         <Route path="/pedidos/:orderId" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
+
+        <Route path="/rpg-arma" element={<CreateWeaponForm />} />
       </Routes>
     </Router>
   );

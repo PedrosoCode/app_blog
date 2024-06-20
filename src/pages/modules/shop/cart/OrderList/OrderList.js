@@ -3,8 +3,6 @@ import axios from 'axios';
 import { Container, Table, Card, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-//TODO - Permitir visualizar os ítens do pedido
-
 const OrderList = () => {
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState('');
