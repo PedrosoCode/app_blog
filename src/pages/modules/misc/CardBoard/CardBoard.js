@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import './CardBoard.css';
 
 const CardBoard = () => {
   const [cards, setCards] = useState([]);
@@ -18,6 +19,7 @@ const CardBoard = () => {
           'Authorization': `Bearer ${token}`
         }
       });
+      console.log('Fetched cards:', response.data);
       setCards(response.data);
     } catch (error) {
       console.error('Error fetching cards:', error);
@@ -42,6 +44,19 @@ const CardBoard = () => {
     }
   };
 
+  const updateCardStatus = async (cardId, newStatus) => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.put(`http://localhost:3042/api/cards/${cardId}`, { status: newStatus }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    } catch (error) {
+      console.error('Error updating card status:', error);
+    }
+  };
+
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -51,7 +66,7 @@ const CardBoard = () => {
     updatedCards.splice(result.destination.index, 0, reorderedCard);
 
     setCards(updatedCards);
-    // TODO: Update card status in the backend
+    updateCardStatus(reorderedCard.id, result.destination.droppableId);
   };
 
   return (
@@ -74,7 +89,7 @@ const CardBoard = () => {
                 {cards
                   .filter((card) => card.status === status)
                   .map((card, index) => (
-                    <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
+                    <Draggable key={card.id} draggableId={String(card.id)} index={index}>
                       {(provided) => (
                         <div
                           ref={provided.innerRef}
