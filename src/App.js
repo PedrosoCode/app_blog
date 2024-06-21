@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
+import './pages/modules/misc/CardBoard/CardBoard.css'
+
 // Pages
 import HomePage from './pages/modules/pages/HomePage/HomePage';
 import AboutPage from './pages/modules/pages/AboutPage/AboutPage';
@@ -16,15 +18,18 @@ import PostDetail from './pages/modules/posts/PostDetail/PostDetail';
 import AllPostsList from './pages/modules/posts/AllPostsList/AllPostsList';
 
 import ProductDetail from './pages/modules/shop/ProductDetail/ProductDetail';
-import OrderDetail from './pages/modules/cart/OrderDetail/OrderDetail';
 import UpdateDeleteProduct from './pages/modules/shop/UpdateDeleteProduct/UpdateDeleteProduct';
 import ProductList from './pages/modules/shop/ProductList/ProductList';
 import CreateProduct from './pages/modules/shop/CreateProduct/CreateProduct';
 
 import ManageImages from './pages/modules/misc/ManageImages/ManageImages';
 import AdminFooterPage from './pages/modules/admin/AdminFooterPage/AdminFooterPage';
-import CartList from './pages/modules/cart/CartList/CartList';
-import OrderList from './pages/modules/cart/OrderList/OrderList';
+
+import OrderDetail from './pages/modules/shop/cart/OrderDetail/OrderDetail';
+import CartList from './pages/modules/shop/cart/CartList/CartList';
+import OrderList from './pages/modules/shop/cart/OrderList/OrderList';
+
+import CardBoard from './pages/modules/misc/CardBoard/CardBoard';
 
 import CreateWeaponForm from './pages/modules/rpg/CreateWeaponForm';
 
@@ -62,6 +67,8 @@ axios.interceptors.request.use(
 
 //TODO - Implementar módulo de ficha de personagem
 
+//FIXME - implementar lazyloading para melhor otimização
+
 function App() {
   return (
     <Router>
@@ -95,6 +102,7 @@ function App() {
         <Route path="/pedidos/:orderId" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
 
         <Route path="/rpg-arma" element={<CreateWeaponForm />} />
+        <Route path="/card" element={<CardBoard />} />
       </Routes>
     </Router>
   );
