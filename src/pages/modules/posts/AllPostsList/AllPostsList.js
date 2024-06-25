@@ -75,7 +75,7 @@ function AllPostsList() {
                 <Card.Title>
                   <Link to={`/posts/${post.id}`}>{post.title}</Link>
                 </Card.Title>
-                <Card.Text>{post.content}</Card.Text>
+                <Card.Text dangerouslySetInnerHTML={{ __html: post.content }} />
                 <Card.Text>
                   <small className="text-muted">
                     Por {post.user_id} em {new Date(post.created_at).toLocaleDateString()}

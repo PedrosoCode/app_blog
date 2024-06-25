@@ -54,6 +54,8 @@ axios.interceptors.request.use(
 
 // REVIEW - URL do roteamento para acessar páginas de forma mais intuitiva
 // REVIEW - aprender a usar Salt para que senhas iguais não tenham a mesma hash
+// REVIEW - impedir que todo o conteúdo no post seja mostrado na página de listagem, para melhor organização
+
 // TODO - Adicionar suporte a Markdown nos posts 
 // TODO - Criar uma imagem de placeholder para ser usada, em situações onde uma imagem não está definida
 // TODO - módulo de financeiro - contas a pagar, a receber, lançamento e baixa 
@@ -68,6 +70,7 @@ axios.interceptors.request.use(
 //TODO - Implementar módulo de ficha de personagem
 
 //FIXME - implementar lazyloading para melhor otimização
+//FIXME - editar na página /lista não funciona, apenas o delete
 
 function App() {
   return (

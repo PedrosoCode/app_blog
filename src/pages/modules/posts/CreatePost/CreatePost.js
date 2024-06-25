@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // import styles
 import { Container, Form, Button } from 'react-bootstrap';
 
 function CreatePost() {
@@ -26,6 +28,29 @@ function CreatePost() {
         });
     };
 
+    // Configuração do ReactQuill
+    const modules = {
+      toolbar: [
+        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+        [{size: []}],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{'list': 'ordered'}, {'list': 'bullet'}, 
+         {'indent': '-1'}, {'indent': '+1'}],
+        ['link', 'image', 'video'],
+        ['clean'],
+        [{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
+        [{ 'align': [] }],
+      ],
+    };
+
+    const formats = [
+      'header', 'font', 'size',
+      'bold', 'italic', 'underline', 'strike', 'blockquote',
+      'list', 'bullet', 'indent',
+      'link', 'image', 'video',
+      'color', 'background', 'align',
+    ];
+
     return (
         <Container className="mt-5">
             <h1 className="mb-4">Criar Post</h1>
@@ -42,12 +67,11 @@ function CreatePost() {
                 </Form.Group>
                 <Form.Group controlId="formContent" className="mb-3">
                     <Form.Label>Conteúdo</Form.Label>
-                    <Form.Control 
-                        as="textarea" 
-                        rows={5} 
+                    <ReactQuill 
                         value={content} 
-                        onChange={(e) => setContent(e.target.value)} 
-                        required 
+                        onChange={setContent} 
+                        modules={modules}
+                        formats={formats}
                         placeholder="Digite o conteúdo do post"
                     />
                 </Form.Group>

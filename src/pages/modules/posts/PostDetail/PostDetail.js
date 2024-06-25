@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 
 function PostDetail() {
   const { id } = useParams();
@@ -28,8 +28,7 @@ function PostDetail() {
       <Card className="my-4">
         <Card.Body>
           <Card.Title>{post.title}</Card.Title>
-          <Card.Text>{post.content}</Card.Text>
-          <Card.Text>{post.main_content}</Card.Text>
+          <Card.Text dangerouslySetInnerHTML={{ __html: post.content }} />
           <Card.Text>
             <small className="text-muted">
               Por {post.user_id} em {new Date(post.created_at).toLocaleDateString()}
