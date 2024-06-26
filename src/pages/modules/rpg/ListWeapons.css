@@ -1,0 +1,5 @@
+/* Arquivo CSS para estilos customizados */
+
+.table-responsive {
+    overflow-x: auto; /* Habilita a rolagem horizontal em telas menores */
+}
