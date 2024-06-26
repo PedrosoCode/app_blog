@@ -37,6 +37,7 @@ import CreateWeaponForm from './pages/modules/rpg/CreateWeaponForm';
 import MainNavbar from './components/MainNavbar/MainNavbar';
 import MainFooter from './components/MainFooter/MainFooter';
 import PrivateRoute from './components/PrivateRoute';
+import ListWeapons from './pages/modules/rpg/ListWeapons';
 
 // Configurar o Axios para adicionar o token JWT em todas as requisições
 axios.interceptors.request.use(
@@ -105,6 +106,7 @@ function App() {
         <Route path="/pedidos/:orderId" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
 
         <Route path="/rpg-arma" element={<CreateWeaponForm />} />
+        <Route path="/rpg-lista" element={<ListWeapons />} />
         <Route path="/card" element={<CardBoard />} />
       </Routes>
     </Router>
