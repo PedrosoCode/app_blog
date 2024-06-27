@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Container, Table, Alert, Form } from 'react-bootstrap';
 import './ListWeapons.css'; // Importando o arquivo CSS para estilos customizados
 
-//FIXME - Adicionar um filtro por nome, atual removido por não funcionar
 //TODO - Criar um botão de remover todos os filtros
 //REVIEW - Verificar geração de tabela onde uma arma pode ter vários danos de tipo diferente 1 -> N
 
@@ -12,6 +11,7 @@ const ListWeapons = () => {
     const [filteredWeapons, setFilteredWeapons] = useState([]);
     const [error, setError] = useState(null);
     const [damageTypeFilter, setDamageTypeFilter] = useState('');
+    const [nameFilter, setNameFilter] = useState('');
 
     useEffect(() => {
         const fetchWeapons = async () => {
@@ -28,23 +28,34 @@ const ListWeapons = () => {
     }, []);
 
     useEffect(() => {
-        // Função para aplicar filtro baseado no tipo de dano selecionado
-        const applyDamageTypeFilter = () => {
+        // Função para aplicar filtro baseado no tipo de dano e nome
+        const applyFilters = () => {
+            let filteredData = weapons;
+
             if (damageTypeFilter) {
-                const filteredData = weapons.filter(weapon =>
+                filteredData = filteredData.filter(weapon =>
                     weapon.tipo_dano.toLowerCase().includes(damageTypeFilter.toLowerCase())
                 );
-                setFilteredWeapons(filteredData);
-            } else {
-                setFilteredWeapons(weapons); // Se nenhum filtro estiver selecionado, exibir todas as armas
             }
+
+            if (nameFilter) {
+                filteredData = filteredData.filter(weapon =>
+                    weapon.nome_arma.toLowerCase().includes(nameFilter.toLowerCase())
+                );
+            }
+
+            setFilteredWeapons(filteredData);
         };
 
-        applyDamageTypeFilter(); // Aplicar o filtro sempre que houver mudanças em damageTypeFilter ou weapons
-    }, [damageTypeFilter, weapons]);
+        applyFilters(); // Aplicar os filtros sempre que houver mudanças em damageTypeFilter, nameFilter ou weapons
+    }, [damageTypeFilter, nameFilter, weapons]);
 
     const handleDamageTypeFilterChange = (event) => {
         setDamageTypeFilter(event.target.value);
+    };
+
+    const handleNameFilterChange = (event) => {
+        setNameFilter(event.target.value);
     };
 
     return (
@@ -52,6 +63,15 @@ const ListWeapons = () => {
             <h1 className="my-4">Lista de Armas de RPG</h1>
             {error && <Alert variant="danger">Erro ao buscar armas</Alert>}
             <Form className="mb-3">
+                <Form.Group controlId="nameFilter">
+                    <Form.Label>Filtrar por nome:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Digite o nome da arma"
+                        value={nameFilter}
+                        onChange={handleNameFilterChange}
+                    />
+                </Form.Group>
                 <Form.Group controlId="damageTypeFilter">
                     <Form.Label>Filtrar por tipo de dano:</Form.Label>
                     <Form.Control
